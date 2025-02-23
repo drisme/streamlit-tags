@@ -23,18 +23,20 @@ export interface TagsInputProps {
   onExisting?: (tag: string) => void;
   onRemoved?: (tag: string) => void;
   maxTags: number;
+  color?: string;
+
 }
 
 // initialize goober once
 setup(React.createElement);
 
-const RTIContainer = css({
+const RTIContainer = css(({ color }) => ({
+  "--rtiTag": color || "#edf2f7",
   "--rtiBg": "#fff",
   "--rtiBorder": "#ccc",
   "--rtiMain": "#3182ce",
   "--rtiRadius": "0.375rem",
   "--rtiS": "0.5rem",
-  "--rtiTag": "#edf2f7",
   "--rtiTagRemove": "#e53e3e",
 
   "*": {
@@ -118,21 +120,21 @@ export const TagsInput = ({
   };
 
   return (
-    <div aria-labelledby={name} className={cc("rti--container", RTIContainer)}>
-      {tags.map(tag => (
-        <Tag key={tag} text={tag} remove={onTagRemove} />
-      ))}
+    <div aria-labelledby={name} className={cc("rti--container", RTIContainer({ color }))}>
+        {tags.map(tag => (
+          <Tag key={tag} text={tag} remove={onTagRemove} />
+        ))}
 
-      <Hint options={suggestions} allowTabFill={true}>
-          <input
-              className={cc("rti--input", RTIInput)}
-              type="text"
-              name={name}
-              placeholder={placeHolder}
-              onKeyDown={handleOnKeyUp}
-              onBlur={onBlur}
-      />
-    </Hint>
+        <Hint options={suggestions} allowTabFill={true}>
+            <input
+                className={cc("rti--input", RTIInput)}
+                type="text"
+                name={name}
+                placeholder={placeHolder}
+                onKeyDown={handleOnKeyUp}
+                onBlur={onBlur}
+        />
+      </Hint>
     </div>
   );
 };

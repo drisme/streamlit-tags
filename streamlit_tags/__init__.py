@@ -51,8 +51,10 @@ def st_tags(value: list = [],
             label: str = "# Enter Keywords",
             text: str = "Press enter to add more",
             maxtags: int = -1,
-            key=None) -> list:
+            key=None,
+            color: str = "#FF0000") -> list:
     '''
+
 
     :param maxtags: Maximum number of tags allowed maxtags = -1 for unlimited entries
     :param suggestions: (List) List of possible suggestions
@@ -62,6 +64,7 @@ def st_tags(value: list = [],
     :param key: (Str)
         An optional string to use as the unique key for the widget.
         Assign a key so the component is not remount every time the script is rerun.
+    :param color: (Str) The hex representation of the color ex: '#FF0000'
     :return: Tags
     '''
     import streamlit as st
@@ -72,6 +75,7 @@ def st_tags(value: list = [],
                                       initialValue=value,
                                       suggestions=suggestions,
                                       maxTags=maxtags,
+                                      color=color,
                                       key=key,
                                       default=value)
     return component_value
